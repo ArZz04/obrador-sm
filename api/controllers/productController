@@ -1,0 +1,11 @@
+const db = require('../db/db.js');
+
+// updateProduct
+
+async funtion updateProduct(req, res)  {
+    try{
+
+    }
+}
+
+module.exports = { updateProduct };

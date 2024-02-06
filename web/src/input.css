@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind aspect-ratio;
+
+@font-face {
+    font-family: 'TheNextFont';
+    src: url('../public/fonts/TheNextFont.ttf') format('truetype');
+    /* Puedes agregar más formatos según los archivos que tengas disponibles */
+  }
+
+body{
+    font-family: 'TheNextFont';
+}
