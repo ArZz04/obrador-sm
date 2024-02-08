@@ -1,16 +1,12 @@
 
-// JavaScript para manejar la apertura del modal y evitar la redirección del formulario
 function openModal(event) {
-    event.preventDefault();  // Evita la acción predeterminada del formulario
+    event.preventDefault();
 
-    // Crea el modal y muestra el contenido
     const modalContainer = document.querySelector('#modal-div');
     modalContainer.classList.remove('hidden');
 }
 
-// Función para cerrar el modal
 function closeModal() {
-    // Oculta y elimina el modal
     const modalContainer = document.querySelector('#modal-div');
     modalContainer.classList.add('hidden');
 }
@@ -22,20 +18,45 @@ function clearInputs() {
     document.getElementById('price-input').value = '';
 }
 
+function putPriceApi(newPrice, productId) {
+    const url = `http://localhost:3000/api/product/${productId}`;
+
+    return fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ price: newPrice })
+    })
+}
+
 function uploadPrice() {
     const newPrice = document.getElementById('price-input').value;
     const familyProduct = document.getElementById('Family-select').value;
     const subFamilyProduct = document.getElementById('Subfamily-select').value;
-    const productName = document.getElementById('ProductName-select').value;
+    const productId = document.getElementById('ProductName-select').value;
 
-    if (newPrice == ''|| familyProduct == ''|| subFamilyProduct == '' ||  productName == ''){
-        alert("Favor de elegir e insertar valores validos!!")
+    if (newPrice === '' || familyProduct === '' || subFamilyProduct === '' || productId === '') {
+        alert("Favor de elegir e insertar valores válidos!!");
         clearInputs();
-    }else{
-        const message = "El producto: " + productName + " de la familia " + familyProduct + " y subfamilia " + subFamilyProduct + " fue modificado. Su nuevo precio es: " + newPrice;
-        alert(message);
+    } else {
+        const message = "El producto con id: " + productId + " de la familia " + (familyProduct + 1) + " y subfamilia " + subFamilyProduct + " fue modificado. Su nuevo precio es: $" + newPrice;
+
+        // Llama a putPriceApi y maneja la respuesta y los errores
+        putPriceApi(parseFloat(newPrice), parseInt(productId))
+            .then(response => {
+                if (response.ok) {
+                    alert(message);
+                } else {
+                    throw new Error('Hubo un error al actualizar el precio, contacte a Soporte...');
+                }
+            })
+            .catch(error => {
+                console.error('Error al actualizar el precio:', error);
+                alert('Hubo un error al actualizar el precio, contacte a Soporte...');
+            })
+            .finally(() => {
+                closeModal();
+            });
     }
-
-
-    closeModal()
 }

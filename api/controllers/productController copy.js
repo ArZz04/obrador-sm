@@ -1,18 +1,6 @@
 
 const db = require('../db/db.js');
 
-console.log("hi")
-
-// RUTA PARA OBTENER TODOS LOS PRODUCTOS
-// RUTA PARA OBTENER UN PRODUCTO POR ID
-// RUTA PARA OBTENER PRODUCTOS POR FAMILIA
-// RUTA PARA OBTENER PRODUCTOS POR SUBFAMILIA
-// RUTA PARA OBTENER PRODUCTOS POR NOMBRE
-// RUTA PARA CREAR UN PRODUCTO
-// RUTA PARA ACTUALIZAR UN PRODUCTO
-// RUTA PARA BORRAR UN PRODUCTO
-
-// RUTA PARA OBTENER TODOS LOS PRODUCTOS
 async function getProducts(req, res) {
 
     db.all('SELECT * FROM productss', (err, result) => {
@@ -22,7 +10,6 @@ async function getProducts(req, res) {
 
 }
 
-// RUTA PARA OBTENER UN PRODUCTO POR ID
 async function getProductById(req, res) {
     const id = req.params.id;
     const query = 'SELECT * FROM products WHERE id = ?';
@@ -32,7 +19,6 @@ async function getProductById(req, res) {
       });
 }
 
-// RUTA PARA OBTENER PRODUCTOS POR FAMILIA
 async function getProductsByFamily(req, res) {
   try {
     const family = req.params.family;

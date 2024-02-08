@@ -31,15 +31,10 @@ async function getProducts() {
       if (err) {
         reject(err);
       } else {
-        console.log('Products for subfamily: ', result); // Agrega esta línea para depurar
         resolve(result);
       }
     });
   });
-}
-
-async function updatePrice(req, res) {
-  
 }
 
 async function getInfo(req, res) {
@@ -54,7 +49,6 @@ async function getInfo(req, res) {
       const familyId = subfamily.family_id;
 
       if (!familyMap[familyId]) {
-        // Si la familia no existe en el mapa, crear un nuevo objeto con una lista de subfamilias
         familyMap[familyId] = {
           id: familyId,
           name: families.find(family => family.id === familyId).name,
@@ -72,15 +66,11 @@ async function getInfo(req, res) {
       };
     });
 
-    // Ahora, familyMap contiene las subfamilias y productos agrupados por familias
-
-    // Formatear el resultado para excluir el índice con "<-"
     const formattedResult = Object.values(familyMap);
 
     res.send(formattedResult);
 
   } catch (error) {
-    // Manejar errores aquí
     console.error(error);
     res.status(500).send('Error interno del servidor');
   }
