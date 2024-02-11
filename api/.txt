@@ -102,3 +102,16 @@ INSERT INTO products (name, price, family_id, subfamily_id, active, lastmodified
     ('SURIMI', 15.99, 3, NULL, 1, '2024-01-08 13:30:00'),
     ('MARLIN AHUMADO', 15.99, 3, NULL, 1, '2024-01-08 13:30:00'),
     ('MEDALLON DE ATUN', 15.99, 3, NULL, 1, '2024-01-08 13:30:00');
+
+
+function getLastFamilyApi(familyId) {
+        const url = `${API_LOCAL_URL}/api/families/last`;
+    
+        return fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "familyId": familyId })
+        })
+}

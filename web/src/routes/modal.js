@@ -42,7 +42,6 @@ function uploadPrice() {
     } else {
         const message = "El producto con id: " + productId + " de la familia " + (familyProduct + 1) + " y subfamilia " + subFamilyProduct + " fue modificado. Su nuevo precio es: $" + newPrice;
 
-        // Llama a putPriceApi y maneja la respuesta y los errores
         putPriceApi(parseFloat(newPrice), parseInt(productId))
             .then(response => {
                 if (response.ok) {
