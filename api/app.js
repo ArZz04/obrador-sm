@@ -15,7 +15,7 @@ var corsOptions = {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true)
     } else {
-      callback(new Error('Not allowed by CORS'))
+      callback("Your request cannot be processed at this time due to security restrictions.");
     }
   }
 }
