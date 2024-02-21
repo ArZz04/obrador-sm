@@ -115,3 +115,14 @@ function getLastFamilyApi(familyId) {
             body: JSON.stringify({ "familyId": familyId })
         })
 }
+
+location = / {
+  root /home/arzz-web/htdocs/web.arzz.tech/src/routes;
+  index /src/index.html;
+  }
+  
+  error_page 404 /error.html;
+  location = /error.html {
+  root /home/arzz-web/htdocs/web.arzz.tech/src;
+  internal;
+  }
