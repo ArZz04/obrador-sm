@@ -1,5 +1,17 @@
 const db = require('../db/db.js');
 
+async function getProductsPerFamily(familyId, subfamilyId) {
+    return new Promise((resolve, reject) => {
+      db.all(`SELECT * FROM products WHERE family_id = ? AND subfamily_id = ?`, [familyId, subfamilyId], (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
+    });
+  }
+
 async function updateProduct(req, res) {
     try {
         const productId = req.params.productId; // Obtener el ID del producto de los parámetros de la URL
@@ -20,4 +32,18 @@ async function updateProduct(req, res) {
     }
 }
 
-module.exports = { updateProduct };
+async function getProducts(req, res) {
+    try {
+        const familyId = req.body.familyId;
+        const subfamilyId = req.body.subfamilyId;
+
+        console.log(`Producto con FamilyID: ${familyId} y subfamilia: ${subfamilyId}`);
+        const products = await getProductsPerFamily(familyId, subfamilyId);
+        res.status(200).json({ products: products });
+    } catch (error) {
+        console.error('Error al obtener los productos:', error);
+        res.status(500).json({ error: 'Ocurrió un error al obtener los productos' });
+    }
+}
+
+module.exports = { updateProduct, getProducts };

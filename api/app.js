@@ -9,7 +9,11 @@ const app = express();
 // Definir el puerto en el que el servidor escuchará las solicitudes
 const port = process.env.PORT || 5000;
 
-var whitelist = ['http://127.0.0.1:5500', 'https://web.arzz.tech', ];
+var whitelist = ['http://127.0.0.1:5500', 'https://web.arzz.tech', 'http://localhost:5000' ];
+var whitelistAll = ['*'];
+var corsOptionss = {
+  origin: whitelistAll
+}
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
@@ -26,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Configurar las rutas de la aplicación
-app.use('/api', cors(corsOptions), homeRoutes);
+app.use('/api', cors(corsOptionss), homeRoutes);
 
 // Ruta para redirigir a GitHub
 app.get('/', (req, res) => {
