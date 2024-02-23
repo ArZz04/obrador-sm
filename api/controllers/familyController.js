@@ -2,16 +2,16 @@
 const db = require('../db/db.js');
 
 async function getLastFamily() {
-    return new Promise((resolve, reject) => {
-      db.all(`SELECT family_id, lastmodified  FROM products GROUP BY family_id ORDER BY MAX(lastmodified) DESC LIMIT 4`, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
+  return new Promise((resolve, reject) => {
+    db.all(`SELECT family_id, lastmodified  FROM products GROUP BY family_id ORDER BY MAX(lastmodified) DESC LIMIT 4`, (err, result) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(result);
+      }
     });
-  }
+  });
+}
 
 async function formattedDate(date_to_format) {
 

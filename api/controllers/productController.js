@@ -34,8 +34,8 @@ async function updateProduct(req, res) {
 
 async function getProducts(req, res) {
     try {
-        const familyId = req.body.familyId;
-        const subfamilyId = req.body.subfamilyId;
+        const familyId = req.query.familyId;
+        const subfamilyId = req.query.subfamilyId;
 
         console.log(`Producto con FamilyID: ${familyId} y subfamilia: ${subfamilyId}`);
         const products = await getProductsPerFamily(familyId, subfamilyId);

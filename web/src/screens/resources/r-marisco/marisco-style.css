@@ -7,3 +7,10 @@
     left: 95px;
     top: 107px;
 }
+
+.dots {
+    display: inline-block;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 1px; /* Ajusta la altura según tu diseño */
+    background-color: black; /* Color de los puntos */
+}
