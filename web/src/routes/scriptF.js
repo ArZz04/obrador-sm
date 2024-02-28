@@ -4,7 +4,7 @@ const selectProduct = document.getElementById('ProductName-select');
 const inputPrice = document.getElementById('price-input');
 
 
-fetch('http://localhost:5000/api/products/info')
+fetch('http://localhost:3000/api/products/info')
   .then(response => response.json())
   .then(data => {
     selectFamily.innerHTML = '<option value="">Seleccionar Familia</option>';

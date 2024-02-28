@@ -19,7 +19,7 @@ function clearInputs() {
 }
 
 function putPriceApi(newPrice, productId) {
-    const url = `http://localhost:5000/api/product/${productId}`;
+    const url = `http://localhost:3000/api/product/${productId}`;
 
     return fetch(url, {
         method: 'PUT',

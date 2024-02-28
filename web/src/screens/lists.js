@@ -1,6 +1,6 @@
-// Define las constantes para las URL de la API
-const API_URL = 'https://api-web.arzz.tech'; // URL de la API en producción
-const API_LOCAL_URL = 'http://localhost:5000'; // URL de la API en entorno local
+// API Module
+const API_URL = 'https://api-web.arzz.tech';
+const API_LOCAL_URL = 'http://localhost:3000';
 
 async function fetchProducts(familyId, subfamilyId) {
     const url = `${API_LOCAL_URL}/api/products/families?familyId=${familyId}&subfamilyId=${subfamilyId}`;
@@ -10,72 +10,69 @@ async function fetchProducts(familyId, subfamilyId) {
         if (!response.ok) {
             throw new Error('Error al obtener los datos de la API');
         }
-        const data = await response.json();
-        console.log(data);
-        // Maneja la respuesta de la API según sea necesario
+        return await response.json();
     } catch (error) {
-        console.error('Error al obtener datos de la API:', error);
-        // Maneja el error
+        throw new Error('Error al obtener datos de la API:', error);
     }
 }
 
-// Esta es la parte del código que ya tienes
+// UI Module
 const listContainer = document.querySelector('.list-prices');
 
-async function displayProducts() {
-    try {
-        const indexSpan = document.querySelector('.list-index');
-        const indexText = indexSpan.textContent; // Obtiene el contenido del span
-        const indexArray = JSON.parse(indexText); // Convierte el texto JSON a un array
-
-        const familyId = indexArray[0];
-        const subfamilyId = indexArray[1];
-
-        const response = await fetchProducts(familyId, subfamilyId); // Espera a que se resuelva la promesa
-        listProducts = response.products;
-
-        console.log('Products received:', response);
-
-        if (Array.isArray(listProducts)) {
-            listProducts.forEach(listProducts => {
-                addProductToList(listProducts);
-            });
-        } else {
-            console.error('Error: Products is not an array:', products);
-        }
-    } catch (error) {
-        console.error('Error al mostrar los productos:', error);
-    }
+function displayProducts(products) {
+    products.forEach(product => {
+        addProductToList(product);
+    });
 }
 
-// Función para crear un elemento de producto y agregarlo al contenedor
 function addProductToList(product) {
-    // Crear elementos HTML
+    const productDiv = createProductElement(product);
+    listContainer.appendChild(productDiv);
+}
+
+function createProductElement(product) {
     const productDiv = document.createElement('div');
-    productDiv.classList.add('pcol-Marisco');
+    productDiv.classList.add('pcol-screen');
 
-    const nameSpan = document.createElement('span');
-    nameSpan.classList.add('pname', 'text-black');
-    nameSpan.textContent = product.name;
+    const nameSpan = createSpan('pname text-black', product.name);
+    const dotsSpan = createSpan('pdots text-green', ' ..................................... ');
+    const priceSpan = createSpan('pprice text-black', `$${product.price}`);
 
-    const dotsSpan = document.createElement('span');
-    dotsSpan.classList.add('pdots', 'text-green');
-    dotsSpan.textContent = ' ..................................... ';
-
-    const priceSpan = document.createElement('span');
-    priceSpan.classList.add('pprice', 'text-black');
-    priceSpan.textContent = `$${product.price}`;
-
-    // Agregar los elementos al contenedor del producto
     productDiv.appendChild(nameSpan);
     productDiv.appendChild(dotsSpan);
     productDiv.appendChild(priceSpan);
 
-    // Agregar el producto al contenedor principal
-    listContainer.appendChild(productDiv);
+    return productDiv;
 }
 
-// Llamar a la función displayProducts una vez que el DOM se haya cargado
-document.addEventListener('DOMContentLoaded', () => {
-    displayProducts();
+function createSpan(className, textContent) {
+    const span = document.createElement('span');
+    span.classList.add(...className.split(' '));
+    span.textContent = textContent;
+    return span;
+}
+
+// Main Module
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const indexSpan = document.querySelector('.list-index');
+        const indexText = indexSpan.textContent;
+        const indexArray = JSON.parse(indexText);
+
+        if (Array.isArray(indexArray) && indexArray.length === 2) {
+            const familyId = indexArray[0];
+            const subfamilyId = indexArray[1];
+
+            const response = await fetchProducts(familyId, subfamilyId);
+            if (Array.isArray(response.products)) {
+                displayProducts(response.products);
+            } else {
+                console.error('Error: Products is not an array:', response.products);
+            }
+        } else {
+            console.error('Error: Invalid index format');
+        }
+    } catch (error) {
+        console.error('Error al mostrar los productos:', error);
+    }
 });

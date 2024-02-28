@@ -7,9 +7,9 @@ const cors = require('cors');
 const app = express();
 
 // Definir el puerto en el que el servidor escuchará las solicitudes
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
-var whitelist = ['http://127.0.0.1:5500', 'https://web.arzz.tech', 'http://localhost:5000' ];
+var whitelist = ['http://127.0.0.1:5500', 'https://web.arzz.tech', 'http://localhost:5000', 'http://localhost:3000' ];
 
 var corsOptions = {
   origin: function (origin, callback) {
