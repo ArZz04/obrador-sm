@@ -1,4 +1,7 @@
 
+const API_URL = 'https://api-web.arzz.tech' || 'http://localhost:5000';
+const API_URLs = 'http://localhost:5000';
+
 function openModal(event) {
     event.preventDefault();
 
@@ -19,7 +22,7 @@ function clearInputs() {
 }
 
 function putPriceApi(newPrice, productId) {
-    const url = `http://localhost:3000/api/product/${productId}`;
+    const url = `${API_URLs}/api/product/${productId}`;
 
     return fetch(url, {
         method: 'PUT',

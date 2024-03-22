@@ -3,8 +3,10 @@ const selectSubfamily = document.getElementById('Subfamily-select');
 const selectProduct = document.getElementById('ProductName-select');
 const inputPrice = document.getElementById('price-input');
 
+const API_URL = 'https://api-web.arzz.tech' || 'http://localhost:5000';
+const API_URLs = 'http://localhost:5000';
 
-fetch('http://localhost:3000/api/products/info')
+fetch(`${API_URLs}/api/products/info`)
   .then(response => response.json())
   .then(data => {
     selectFamily.innerHTML = '<option value="">Seleccionar Familia</option>';
@@ -43,15 +45,18 @@ fetch('http://localhost:3000/api/products/info')
 
       for (const product of products) {
         const option = document.createElement('option');
-        option.value = product.id;
+        option.value = [product.id, product.price];
         option.textContent = product.name;
         selectProduct.appendChild(option);
       }
 
-      const selectedProduct = products[0];
-      if (selectedProduct) {
-        inputPrice.placeholder = `Actual: ${selectedProduct.price}`;
-      }
+    
+    });
+
+    selectProduct.addEventListener('change', () => {
+      const selectedProductId = selectProduct.value.split(',')[1];
+
+        inputPrice.placeholder = `Actual: ${selectedProductId}`;
     });
   })
   .catch(error => console.error('Error al obtener datos de la API:', error));

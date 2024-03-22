@@ -1,7 +1,10 @@
 // Importar los módulos necesarios
+require('dotenv').config();
+
 const express = require('express');
 const homeRoutes = require('./routes/homeRouter.js');
 const cors = require('cors');
+
 
 // Crear una instancia de la aplicación Express
 const app = express();

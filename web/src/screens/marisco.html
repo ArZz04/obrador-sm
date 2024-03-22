@@ -1,36 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MARISCO - SANTA MARIA</title>
-    <link href="../../dist/output.css" rel="stylesheet">
-    <link rel="stylesheet" href="./resources/r-marisco/marisco-style.css">
-</head>
-<body>
-    <main>
-        <div class="static bg-red-400">
-            <div class="absolute logo">
-                <span class="list-index ">[4, 8]</span>
-                <!-- AQUI UN TEXTO O LLAMADA DE FUNCION, DONDE PASARLE LOS PARAMETROS A LA FUNCION -->
-                <div class="list-prices">
-
-
-                    <!-- <div class="pcol-Marisco">   
-                        <span class="pname text-black"> FILETE TILAPIA </span>
-                        <span class="pdots text-green"> ..................................... </span>
-                        <span class="pprice text-black"> $123 </span> 
-                    </div> -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MARISCO - SANTA MARIA</title>
+        <link href="../../dist/output.css" rel="stylesheet">
+        <link rel="stylesheet" href="./resources/r-marisco/marisco-style.css">
+    </head>
+    <body>
+        <main class="main relative">
+            <div class="frame">
+                <img src="./resources/r-marisco/MARCO.png" alt="Marco">
+            </div>
+    
+            <div class="flex z-10 ">
+                <div class="flex flex-col">
+                    <div class="relative">
+                        <img class="logo" src="./resources/r-marisco/LOGO.png" alt="Logo">
+                        <img class="title" src="./resources/r-marisco/MARISCO.png" alt="Marisco">
+                    </div>
+    
+                    <div class="relative">
+                        <span class="list-index ">[4, 8]</span>
+                        <div class="list-prices">
+                            <!-- Aquí puedes agregar la lista de productos -->
+                        </div>
+                    </div>
                 </div>
-                
-                <img class="z-10 " src="./resources/r-marisco/LOGO.png">
             </div>
-            <div class="absolute inset-0 w-full h-full object-cover z-0">
-                <img class="z-10" src="./resources/r-marisco/MARCO.png">
-            </div>
-          </div>
-        
-    </main>
-    <script src="lists.js" type="module"></script>
-</body>
+        </main>
+
+        <script src="product-display.js" type="module"></script>
+    </body>
 </html>

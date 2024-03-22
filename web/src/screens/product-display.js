@@ -1,9 +1,9 @@
 // API Module
-const API_URL = 'https://api-web.arzz.tech';
-const API_LOCAL_URL = 'http://localhost:3000';
+const API_URLs = 'https://api-web.arzz.tech' || 'http://localhost:5000';
+const API_URL = 'http://localhost:5000';
 
 async function fetchProducts(familyId, subfamilyId) {
-    const url = `${API_LOCAL_URL}/api/products/families?familyId=${familyId}&subfamilyId=${subfamilyId}`;
+    const url = `${API_URL}/api/products/families?familyId=${familyId}&subfamilyId=${subfamilyId}`;
     
     try {
         const response = await fetch(url);
@@ -34,13 +34,17 @@ function createProductElement(product) {
     const productDiv = document.createElement('div');
     productDiv.classList.add('pcol-screen');
 
-    const nameSpan = createSpan('pname text-black', product.name);
-    const dotsSpan = createSpan('pdots text-green', ' ..................................... ');
-    const priceSpan = createSpan('pprice text-black', `$${product.price}`);
+    const nameSpan = createSpan('pname text-black', `${product.name} `);
+    const dotNumber = '.'.repeat(product.dots);
+    const dotsSpan = createSpan('pdots text-green', dotNumber);
+    const formatSpan = createSpan('pformat text-black', `${product.format}`);
+    const priceSpan = createSpan('pprice text-black', ` $${product.price}`);
+
 
     productDiv.appendChild(nameSpan);
     productDiv.appendChild(dotsSpan);
     productDiv.appendChild(priceSpan);
+    productDiv.appendChild(formatSpan);
 
     return productDiv;
 }
@@ -65,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             const response = await fetchProducts(familyId, subfamilyId);
             if (Array.isArray(response.products)) {
+                console.log('Products:', response.products);
                 displayProducts(response.products);
             } else {
                 console.error('Error: Products is not an array:', response.products);

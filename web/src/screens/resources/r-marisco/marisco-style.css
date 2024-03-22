@@ -1,18 +1,42 @@
+::-webkit-scrollbar {
+    display: none;
+}
+.frame {
+    position: relative;
+    
+}
+.frame img {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .logo{
-    left: 95px;
-    top: 126px;
+    position: relative;
+    left: 100px;
+    top: 100px;
 }
 
 .title{
-    left: 95px;
-    top: 107px;
+    position: relative;
+    left: 102px;
+    top: -450px;
 }
 
-.dots {
-    display: inline-block;
-    width: 100%; /* Ocupa todo el ancho disponible */
-    height: 1px; /* Ajusta la altura según tu diseño */
-    background-color: black; /* Color de los puntos */
+.list-prices{
+    position: relative;
+    left: 625px;
+    top: -1220px;
+    font-size: 50px;
+    color: #1b1b1b;
+}
+
+.pformat{
+    font-size: 2rem;
+}
+
+.pkg{
+    font-size: 2rem;
 }
 
 .list-index{
