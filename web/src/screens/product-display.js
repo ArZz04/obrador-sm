@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const subfamilyId = indexArray[1];
 
             const response = await fetchProducts(familyId, subfamilyId);
+            console.log('Response:', response);
             if (Array.isArray(response.products)) {
                 console.log('Products:', response.products);
                 displayProducts(response.products);
