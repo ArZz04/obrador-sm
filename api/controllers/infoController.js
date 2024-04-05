@@ -76,4 +76,14 @@ async function getInfo(req, res) {
   }
 }
 
-module.exports = { getInfo }; 
+async function getAllProducts(req, res) {
+  try {
+      const products = await getProducts();
+      res.status(200).json(products);
+  } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      res.status(500).json({ error: 'Ocurrió un error al obtener los productos' });
+  }
+}
+
+module.exports = { getInfo, getAllProducts }; 

@@ -1,7 +1,8 @@
-const API_URL = 'https://api-web.arzz.tech' || 'http://localhost:5000';
+const API_URL = 'https://api-web.arzz.tech' || 'http://localhost:3000';
+const API_URLs = 'http://localhost:3000';
 
 async function getLastFamilyApi() {
-    const url = `${API_URL}/api/families/last`;
+    const url = `${API_URLs}/api/families/last`;
     
     try {
         const response = await fetch(url, {

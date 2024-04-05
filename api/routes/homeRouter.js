@@ -8,7 +8,10 @@ const familyController = require('../controllers/familyController');
 router.put('/product/:productId', productController.updateProduct);
 router.get('/products/families', productController.getProducts);
 
+
 router.get('/families/last', familyController.lastFModified);
+
 router.get('/products/info', infoController.getInfo);
+router.get('/products/all', infoController.getAllProducts);
 
 module.exports = router;

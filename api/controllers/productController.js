@@ -1,4 +1,6 @@
 const db = require('../db/db.js');
+const infoController = require('./infoController');
+const allProducts = infoController.getProducts;
 
 async function getProductsPerFamily(familyId, subfamilyId) {
     return new Promise((resolve, reject) => {
@@ -45,5 +47,7 @@ async function getProducts(req, res) {
         res.status(500).json({ error: 'Ocurrió un error al obtener los productos' });
     }
 }
+
+
 
 module.exports = { updateProduct, getProducts };

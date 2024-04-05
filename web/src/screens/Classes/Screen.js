@@ -1,18 +1,36 @@
-class Screen {
-    static renderProducts(products) {
-        const container = document.createElement('div');
-        container.classList.add('products-container');
-
-        products.forEach(product => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product');
-            productElement.innerHTML = `
-                <h3>${product.name}</h3>
-                <p>Price: ${product.price}</p>
-            `;
-            container.appendChild(productElement);
-        });
-
-        return container;
+export class Screen {
+    constructor(id) {
+        this.id = id;
+        this.products = [];
     }
+
+    addProduct(product) {
+        this.products.push(product);
+    }
+
+    static createSpan(className, textContent) {
+        const span = document.createElement('span');
+        span.classList.add(...className.split(' '));
+        span.textContent = textContent;
+        return span;
+    }
+
+    static renderProducts(products) {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('pcol-screen');
+
+        const nameSpan = Screen.createSpan('pname text-black', `${product.name} `);
+        const dotNumber = '.'.repeat(product.dots);
+        const dotsSpan = Screen.createSpan('pdots text-green', dotNumber);
+        const formatSpan = Screen.createSpan('pformat text-black', `${product.format}`);
+        const priceSpan = Screen.createSpan('pprice text-black', ` $${product.price}`);
+
+        productDiv.appendChild(nameSpan);
+        productDiv.appendChild(dotsSpan);
+        productDiv.appendChild(priceSpan);
+        productDiv.appendChild(formatSpan);
+
+        return productDiv;
+    }
+
 }
