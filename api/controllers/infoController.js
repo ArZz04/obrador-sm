@@ -37,6 +37,19 @@ async function getProducts() {
   });
 }
 
+async function refreshInfo() {
+  return new Promise((resolve, reject) => {
+    db.run('UPDATE products SET subfamily_id = 3 WHERE id = 51', (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve('Subfamily_id actualizado correctamente a 2 para el ID 24');
+      }
+    });
+  });
+}
+
+
 async function getInfo(req, res) {
   try {
     const families = await getFamilies();
