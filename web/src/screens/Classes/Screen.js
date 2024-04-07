@@ -1,10 +1,16 @@
 export class Screen {
     constructor() {
         this.products = [];
+        this.divs = [];
+        this.currentIndex = 0;
     }
 
     addProducts(products) {
         this.products.push(products);
+    }
+
+    addDiv(div) {
+        this.divs.push(div);
     }
 
     static createSpan(className, textContent) {
@@ -14,39 +20,33 @@ export class Screen {
         return span;
     }
 
-    static renderProducts(products, divId) {
-        // Obtener el div correspondiente al ID
-        const div = document.getElementById(divId);
-        console.log('Div:', div);
+    static createProductDiv(product) {
+        const productDiv = document.createElement('div');
+        productDiv.classList.add('pcol-screen');
+    
+        const nameSpan = Screen.createSpan('pname text-black', `${product.name} `);
+        const dotNumber = '.'.repeat(product.dots);
+        const dotsSpan = Screen.createSpan('pdots text-green', dotNumber);
+        const formatSpan = Screen.createSpan('pformat text-black', `${product.format}`);
+        const priceSpan = Screen.createSpan('pprice text-black', ` $${product.price}`);
+    
+        productDiv.appendChild(nameSpan);
+        productDiv.appendChild(dotsSpan);
+        productDiv.appendChild(priceSpan);
+        productDiv.appendChild(formatSpan);
+    
+        return productDiv;
+    }
 
-        // Verificar si el div existe
-        if (!div) {
-            console.error(`El div con ID ${divId} no existe.`);
-            return;
-        }
-
-        // Limpiar el contenido del div antes de renderizar los productos
-        div.innerHTML = '';
-
-        // Iterar sobre los productos y renderizarlos
+    static renderProducts(products) {
+        const productsContainer = document.createElement('div');
+    
         products.forEach(product => {
-            const productDiv = document.createElement('div');
-            productDiv.classList.add('pcol-screen');
-
-            const nameSpan = Screen.createSpan('pname text-black', `${product.name} `);
-            const dotNumber = '.'.repeat(product.dots);
-            const dotsSpan = Screen.createSpan('pdots text-green', dotNumber);
-            const formatSpan = Screen.createSpan('pformat text-black', `${product.format}`);
-            const priceSpan = Screen.createSpan('pprice text-black', ` $${product.price}`);
-
-            productDiv.appendChild(nameSpan);
-            productDiv.appendChild(dotsSpan);
-            productDiv.appendChild(priceSpan);
-            productDiv.appendChild(formatSpan);
-
-            // Agregar el producto al div correspondiente
-            div.appendChild(productDiv);
+            const productDiv = Screen.createProductDiv(product);
+            productsContainer.appendChild(productDiv);
         });
+    
+        return productsContainer;
     }
 
 }

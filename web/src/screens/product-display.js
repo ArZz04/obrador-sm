@@ -42,26 +42,24 @@ async function fetchProducts() {
     }
 }
 
-function createDivs(count, family) {
+function createDivs(count, family, content) {
     const main = document.querySelector('main');
+    const divsArray = []; // Array para almacenar los divs creados
     for (let i = 1; i <= count; i++) {
         const div = document.createElement('div');
         div.id = `p${i}`;
-        div.classList.add('static', 'bg-red-400');
+        div.classList.add(`divScreen`, 'static', 'bg-red-400');
         div.innerHTML = `
-            
-            <div class="absolute logo${i}">
-                <img class="z-10" src="./resources/r-${family}/P${i}/LOGO.png">
-            </div>
-            <div id="content${i}"></div>
+            <div id="content${i}">${content}</div>
             <div class="absolute title${i}">
                 <img class="z-10" src="./resources/r-${family}/P${i}/LINEA_NOMBRE.png">
             </div>
         `;
         main.appendChild(div);
+        divsArray.push(div); // Agregar el div al array
     }
+    return divsArray; // Devolver el array de divs
 }
-
 
 // Main Module
 document.addEventListener('DOMContentLoaded', async () => {
@@ -71,6 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Obtener la cantidad de elementos .list-index en el documento
         const indexSpans = document.querySelectorAll('.list-index');
         const divsCount = indexSpans.length;
+        const divsGeneratedAll = [];
 
         // Crear los divs fuera del bucle forEach
         var family = '';
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 family = 'marisco';
             }
         });
-        createDivs(divsCount, family); // Crear los divs después de determinar el valor de family
+        
 
         // Iterar sobre cada elemento .list-index y renderizar los productos correspondientes
         indexSpans.forEach((indexSpan, index) => {
@@ -95,9 +94,22 @@ document.addEventListener('DOMContentLoaded', async () => {
             const indexArray = JSON.parse(indexText);
             const productsByIds = products.getProductsByIds(indexArray[0], indexArray[1]);
             // Llamar al método renderProducts para el div correspondiente
-            Screen.renderProducts(productsByIds, `content${indexArray[2]}`);
-            console.log(`Productos para div content${indexArray[2]}:`, productsByIds);
+            const divsGenerated = Screen.renderProducts(productsByIds, `content${indexArray[2]}`);
+            divsGeneratedAll.push(divsGenerated);
         });
+
+        console.log('Divs generados:', divsGeneratedAll);
+        const contents = document.querySelectorAll('.divScreen');
+        // Iterar sobre cada elemento y agregarlo a la lista divs
+        contents.forEach(div => {
+            ScreenList.addDiv(div);
+        });
+
+        // Crear los divs después de determinar el valor de family
+        const x = createDivs(divsCount, family, ScreenList.divs[0]);
+        
+        console.log('Divs:', x);
+        // Llamar al método changeContent
 
     } catch (error) {
         console.error('Error al mostrar los productos:', error);
