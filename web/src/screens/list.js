@@ -42,6 +42,26 @@ async function fetchProducts() {
     }
 }
 
+function verifyFamily(indexSpans) {
+    let family; // Declarar la variable family dentro de la función
+
+    indexSpans.forEach((indexSpan, index) => {
+        const indexText = indexSpan.textContent;
+        const indexArray = JSON.parse(indexText);
+        if (indexArray[0] == 1) {
+            family = 'res';
+        } else if (indexArray[0] == 2) {
+            family = 'cerdo';
+        } else if (indexArray[0] == 3) {
+            family = 'pollo';
+        } else if (indexArray[0] == 4) {
+            family = 'marisco';
+        }
+    });
+
+    return family; // Devolver la variable family
+}
+
 
 // Main Module
 document.addEventListener('DOMContentLoaded', async () => {
@@ -49,10 +69,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         const products = await fetchProducts();
     
         const indexSpans = document.querySelectorAll('.list-index');
+        const indexes = indexSpans.length;
         const productsArray = []
 
-
-        // Iterar sobre cada elemento .list-index y renderizar los productos correspondientes
+        // Iterar sobre cada elemento .list-index para filtrar los productos
         indexSpans.forEach((indexSpan, index) => {
             const indexText = indexSpan.textContent;
             const indexArray = JSON.parse(indexText);
@@ -61,7 +81,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             productsArray.push(productsByIds); 
         });
 
-        console.log (productsArray);
+        // Obtener el valor de family
+        const family = verifyFamily(indexSpans);
+
+        // Crear la pantalla con los productos
+        const screen = ScreenList.createScreen(indexes, family, productsArray);
+        
+        // Agregar la pantalla al cuerpo del documento
+        console.log(screen);
 
     } catch (error) {
         console.error('Error al mostrar los productos:', error);

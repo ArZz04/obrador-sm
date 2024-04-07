@@ -1,16 +1,10 @@
 export class Screen {
     constructor() {
         this.products = [];
-        this.divs = [];
-        this.currentIndex = 0;
     }
 
     addProducts(products) {
         this.products.push(products);
-    }
-
-    addDiv(div) {
-        this.divs.push(div);
     }
 
     static createSpan(className, textContent) {
@@ -20,7 +14,7 @@ export class Screen {
         return span;
     }
 
-    static createProductDiv(product) {
+    static createProduct(product) {
         const productDiv = document.createElement('div');
         productDiv.classList.add('pcol-screen');
     
@@ -38,15 +32,26 @@ export class Screen {
         return productDiv;
     }
 
-    static renderProducts(products) {
+    static createProductsDiv(products) {
         const productsContainer = document.createElement('div');
     
         products.forEach(product => {
-            const productDiv = Screen.createProductDiv(product);
+            const productDiv = Screen.createProduct(product);
             productsContainer.appendChild(productDiv);
         });
-    
+        
         return productsContainer;
+    }
+
+    createScreen(indexes, family, content) {
+        const main = document.querySelector('main');
+        main.classList.add('screen-container');
+    
+        console.log(indexes);
+        console.log(family);
+        console.log(content);
+    
+        return [indexes, family, content];
     }
 
 }
