@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const screen = ScreenList.createScreen(indexes, family, productsArray);
         
         // Agregar la pantalla al cuerpo del documento
-        console.log(screen);
+        document.body.appendChild(screen);
 
     } catch (error) {
         console.error('Error al mostrar los productos:', error);

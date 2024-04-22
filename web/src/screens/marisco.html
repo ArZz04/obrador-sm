@@ -6,17 +6,27 @@
         <title>MARISCO - SANTA MARIA</title>
         <link href="../../dist/output.css" rel="stylesheet">
         <link rel="stylesheet" href="./resources/r-marisco/marisco-style.css">
+        <script src="Components/Dots.js"></script>
+        <script src="Components/Product.js"></script>
+        <script src="Components/Screen.js"></script>
     </head>
     <body>
         <main>
+            
             <!-- P1 -->
             <span class="list-index absolute opacity-0">[4, 8, 1]</span>
 
             <div class="absolute logo">
                 <img class="z-10" src="./resources/LOGO_H.png">
+                
             </div>
-            <p><img class="absolute inset-0 w-full h-full object-cover z-0" src="./resources/MARCO.png"></p>
+            <!-- <p><img class="absolute inset-0 w-full h-full object-cover z-0" src="./resources/MARCO.png"></p> -->
+            
         </main>
-        <script src="product-display.js" type="module"></script>
+        <br>
+        <screen-element></screen-element>
+        <product-element name="BISTEX DE RES" dots="50" format="kg" price="130" ></product-element>
+        <script src="list.js" type="module"></script>
     </body>
 </html>
+
