@@ -21,11 +21,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - run: rm -rf node_modules package-lock.json
+      working-directory: ./web
+    - run: npm install
       working-directory: ./web
     - run: npm audit fix
-      working-directory: ./web
-    - run: npm install --legacy-peer-deps
       working-directory: ./web
     - run: npm run start
       working-directory: ./web
