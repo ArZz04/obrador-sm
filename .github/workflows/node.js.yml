@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -25,10 +25,7 @@ jobs:
       working-directory: ./web
     - run: npm audit fix
       working-directory: ./web
-    - run: npm run start &
+    - run: npm install --legacy-peer-deps
       working-directory: ./web
-    - name: Wait for server to start
-      run: sleep 10
-    - name: Perform tests
-      run: echo "Tests would go here"
+    - run: npm run start
       working-directory: ./web
