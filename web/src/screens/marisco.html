@@ -6,30 +6,27 @@
         <title>MARISCO - SANTA MARIA</title>
         <link href="../../dist/output.css" rel="stylesheet">
         <link rel="stylesheet" href="./resources/r-marisco/marisco-style.css">
+        <script src="Components/Dots.js"></script>
+        <script src="Components/Product.js"></script>
+        <script src="Components/Screen.js"></script>
     </head>
     <body>
-        <main class="main relative">
-            <div class="frame">
-                <img src="./resources/r-marisco/MARCO.png" alt="Marco">
-            </div>
-    
-            <div class="flex z-10 ">
-                <div class="flex flex-col">
-                    <div class="relative">
-                        <img class="logo" src="./resources/r-marisco/LOGO.png" alt="Logo">
-                        <img class="title" src="./resources/r-marisco/MARISCO.png" alt="Marisco">
-                    </div>
-    
-                    <div class="relative">
-                        <span class="list-index ">[4, 8]</span>
-                        <div class="list-prices">
-                            <!-- Aquí puedes agregar la lista de productos -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
+        <main>
+            
+            <!-- P1 -->
+            <span class="list-index absolute opacity-0">[4, 8, 1]</span>
 
-        <script src="product-display.js" type="module"></script>
+            <div class="absolute logo">
+                <img class="z-10" src="./resources/LOGO_H.png">
+                
+            </div>
+            <!-- <p><img class="absolute inset-0 w-full h-full object-cover z-0" src="./resources/MARCO.png"></p> -->
+            
+        </main>
+        <br>
+        <screen-element></screen-element>
+        <product-element name="BISTEX DE RES" dots="50" format="kg" price="130" ></product-element>
+        <script src="list.js" type="module"></script>
     </body>
 </html>
+

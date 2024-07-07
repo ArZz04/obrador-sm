@@ -37,6 +37,19 @@ async function getProducts() {
   });
 }
 
+async function refreshInfo() {
+  return new Promise((resolve, reject) => {
+    db.run('UPDATE products SET subfamily_id = 3 WHERE id = 51', (err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve('Subfamily_id actualizado correctamente a 2 para el ID 24');
+      }
+    });
+  });
+}
+
+
 async function getInfo(req, res) {
   try {
     const families = await getFamilies();
@@ -76,4 +89,14 @@ async function getInfo(req, res) {
   }
 }
 
-module.exports = { getInfo }; 
+async function getAllProducts(req, res) {
+  try {
+      const products = await getProducts();
+      res.status(200).json(products);
+  } catch (error) {
+      console.error('Error al obtener los productos:', error);
+      res.status(500).json({ error: 'Ocurrió un error al obtener los productos' });
+  }
+}
+
+module.exports = { getInfo, getAllProducts }; 

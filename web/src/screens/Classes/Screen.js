@@ -1,18 +1,33 @@
-class Screen {
-    static renderProducts(products) {
-        const container = document.createElement('div');
-        container.classList.add('products-container');
-
-        products.forEach(product => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product');
-            productElement.innerHTML = `
-                <h3>${product.name}</h3>
-                <p>Price: ${product.price}</p>
-            `;
-            container.appendChild(productElement);
-        });
-
-        return container;
+export class Screen {
+    constructor() {
+        this.products = [];
     }
+
+    
+    static createProductsDiv(products) {
+        const productsContainer = document.createElement('div');
+
+        console.log(products);
+    
+        products.forEach(product => {
+            const productDiv = Screen.createProduct(product);
+            productsContainer.appendChild(productDiv);
+        });
+        
+        return productsContainer;
+    }
+
+    createScreen(indexes, family, content) {
+        const main = document.querySelector('main');
+        main.classList.add('screen-container');
+
+        for (let i = 0; i < indexes; i++) {
+            var Scr = Screen.createProductsDiv(content[i]);
+        }
+
+        //const Scr = Screen.createProductsDiv(content[0]);
+
+        return Scr;
+    }
+
 }
